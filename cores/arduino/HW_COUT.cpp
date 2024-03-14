@@ -8,7 +8,20 @@ namespace arduino
         while (status)
         {
             if (_kbhit())
-                buffer += (char)_getch();
+            {
+                while (!mutex)
+                    ;
+
+                mutex = false;
+                char ch = _getch();
+                buffer += ch;
+                if (ch == 0xE0 || ch == 0)
+                {
+                    ch = _getch();
+                    buffer += ch;
+                }
+                mutex = true;
+            }
         }
         return 1;
     }
@@ -48,12 +61,16 @@ namespace arduino
     };
     int HW_COUT::read()
     {
-        if (!status)
-        {
+        if (!status || !buffer.length())
             return 0;
-        }
-        char c = buffer[0];
-        buffer = buffer.substring(1, buffer.length() - 1);
+
+        while (!mutex)
+            ;
+
+        mutex = false;
+        int c = buffer[0];
+        buffer = String(buffer.c_str() + 1, buffer.length() - 1);
+        mutex = true;
         return c;
     };
     void HW_COUT::flush()
@@ -70,7 +87,7 @@ namespace arduino
         return status;
     }
 
-    HW_COUT::HW_COUT(bool begin) : status(false)
+    HW_COUT::HW_COUT(bool begin) : status(false), mutex(true)
     {
         if (begin)
             this->begin();
