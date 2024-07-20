@@ -1,0 +1,6 @@
+#ifndef _ARDUINO_CORE_STL_CONFIG_H_
+#define _ARDUINO_CORE_STL_CONFIG_H_
+
+#define ENABLE_DLOG
+
+#endif

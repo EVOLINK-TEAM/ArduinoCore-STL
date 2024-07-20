@@ -2,6 +2,7 @@
 #include "api/ArduinoAPI.h"
 #undef main
 #include "Serial.h"
+#include "config.h"
 
 int atexit(void (* /*func*/)()) __attribute__((weak));
 // undefine stdlib's abs if encountered

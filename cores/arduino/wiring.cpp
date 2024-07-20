@@ -46,10 +46,18 @@ void delayMicroseconds(unsigned long us)
     }
 }
 
-void pinMode(pin_size_t pin, PinMode mode) {};
-void digitalWrite(pin_size_t pin, PinStatus val);
-PinStatus digitalRead(pin_size_t pin);
-void analogWrite(pin_size_t pin, int val);
-int analogRead(pin_size_t pin);
+void pinMode(pin_size_t pin, PinMode mode)
+{
+    String PinModes[] = {"INPUT", "OUTPUT", "INPUT_PULLUP", "INPUT_PULLDOWN", "OUTPUT_OPENDRAIN"};
+    DLOG("pins", (String)"pinMode: PIN_" + pin + " " + PinModes[mode]);
+};
+void digitalWrite(pin_size_t pin, PinStatus val)
+{
+    String PinStatus[] = {"LOW", "HIGH", "CHANGE", "FALLING", "RISING"};
+    DLOG("pins", (String)"digitalWrite: PIN_" + pin + " " + PinStatus[val]);
+};
+PinStatus digitalRead(pin_size_t pin) { DLOG("pins", (String)"digitalRead: PIN_" + pin); return LOW;};
+void analogWrite(pin_size_t pin, int val) { DLOG("pins", (String)"analogWrite: PIN_" + pin + " " + val); };
+int analogRead(pin_size_t pin) { DLOG("pins", (String)"analogRead: PIN_" + pin); return 0;};
 
 void init() {}
