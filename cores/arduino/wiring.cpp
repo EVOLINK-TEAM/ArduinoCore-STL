@@ -45,3 +45,5 @@ void delayMicroseconds(unsigned long us)
         }
     }
 }
+
+void init() {}

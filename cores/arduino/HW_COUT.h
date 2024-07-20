@@ -14,6 +14,7 @@ namespace arduino
         std::thread t;
         String buffer;
         bool status; // flag
+        bool mutex;  // flag
         int inputService();
 
     public:
