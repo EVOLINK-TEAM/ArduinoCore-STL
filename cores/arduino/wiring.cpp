@@ -1,18 +1,18 @@
 #include <Arduino.h>
 #include <chrono>
 
+const auto initTime = std::chrono::high_resolution_clock::now();
+
 unsigned long micros(void)
 {
-    auto start_time = std::chrono::high_resolution_clock::time_point();
-    auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+    auto now = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now - initTime);
     return duration.count();
 }
 unsigned long millis(void)
 {
-    auto start_time = std::chrono::high_resolution_clock::time_point();
-    auto end_time = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
+    auto now = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(now - initTime);
     return duration.count();
 }
 
@@ -45,5 +45,11 @@ void delayMicroseconds(unsigned long us)
         }
     }
 }
+
+void pinMode(pin_size_t pin, PinMode mode) {};
+void digitalWrite(pin_size_t pin, PinStatus val);
+PinStatus digitalRead(pin_size_t pin);
+void analogWrite(pin_size_t pin, int val);
+int analogRead(pin_size_t pin);
 
 void init() {}
