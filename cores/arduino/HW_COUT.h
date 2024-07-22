@@ -2,18 +2,30 @@
 #define _HW_COUT_H_
 
 #include "api/HardwareSerial.h"
-#include <iostream> //output--cout
-#include <conio.h>  //input--keyboard
+#include <iostream>  //output--cout
 #include <thread>
+#ifdef _WIN32       //input
+#include <conio.h>
+#include <windows.h>
+#else
+#include <unistd.h>
+#include <termios.h>
+#include <fcntl.h>
+#endif
 
 namespace arduino
 {
+    void setNonBlockingInput();
+    bool kbhit();
+    char getch();
+
     class HW_COUT : public HardwareSerial
     {
     private:
         std::thread t;
         String buffer;
         bool status; // flag
+        bool mutex;  // flag
         int inputService();
 
     public:

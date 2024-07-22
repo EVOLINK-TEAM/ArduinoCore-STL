@@ -18,7 +18,7 @@
 */
 
 #include <Arduino.h>
-int main() __attribute__((weak));
+// int main() __attribute__((weak));
 
 // Declared weak in Arduino.h to allow user redefinitions.
 int atexit(void (* /*func*/)()) { return 0; }
