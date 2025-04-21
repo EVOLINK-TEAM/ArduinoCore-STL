@@ -1,0 +1,14 @@
+{
+  "name": "framework-arduino-stl",
+  "version": "0.0.0",
+  "description": "ArduinoCore using STL only, used on the HOST.",
+  "keywords": [
+    "framework",
+    "arduino"
+  ],
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EVOLINK-TEAM/ArduinoCore-STL"
+  }
+}
